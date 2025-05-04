@@ -1,4 +1,4 @@
-# REMED.MD: Brain Tumor Detection Using MRI Images
+# Brain Tumor Detection Using MRI Images
 
 ## Project Overview
 - **Objective**: Automate brain tumor detection and classification using multi-modal MRI scans.
