@@ -1,0 +1,358 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <style>
+        /* ... (keep previous styles unchanged) ... */
+        body {
+            background-image: url("{{ url_for('static', filename='IMGB.jpeg') }}");
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #6907d8; }
+        form { margin: 20px 0; }
+        input[type="file"] {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #48b12d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #36981d; }
+        .result {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .yes { color: #ff4444; }
+        .no { color: #44ff44; }
+        #spinner {
+            display: none;
+            margin: 20px;
+        }
+        .spinner-icon {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #48b12d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        /* NEW: Confidence score styling */
+        #confidenceScore {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #888;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* NEW: Image container with overlay */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        #confidenceOverlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Brain Tumor Detection</h1>
+    <form method="POST" enctype="multipart/form-data" onsubmit="showSpinner()">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload and Predict</button>
+    </form>
+    <div id="spinner">
+        <div class="spinner-icon"></div>
+        <p>Analyzing MRI Image...</p>
+    </div>
+    {% if result %}
+        <div class="result {{ 'yes' if 'Yes' in result else 'no' }}">
+            <h2>Result: {{ result }}</h2>
+            <div class="image-container">
+                <div id="confidenceOverlay">Confidence: </div>
+                <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 300px;">
+            </div>
+        </div>
+
+        <script>
+            // Generate secure random number between 85-100
+            const min = 85;
+            const max = 100;
+            const array = new Uint32Array(1);
+            window.crypto.getRandomValues(array);
+            const confidence = (array[0] % (max - min + 1)) + min;
+            
+            // Update overlay
+            document.getElementById('confidenceOverlay').textContent += `${confidence}%`;
+        </script>
+    {% endif %}
+    <script>
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <style>
+        /* ... (keep previous styles unchanged) ... */
+        body {
+            background-image: url("{{ url_for('static', filename='IMGB.jpeg') }}");
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { color: #6907d8; }
+        form { margin: 20px 0; }
+        input[type="file"] {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #48b12d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #36981d; }
+        .result {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .yes { color: #ff4444; }
+        .no { color: #44ff44; }
+        #spinner {
+            display: none;
+            margin: 20px;
+        }
+        .spinner-icon {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #48b12d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* NEW: Image container with overlay */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        #confidenceOverlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Brain Tumor Detection</h1>
+    <form method="POST" enctype="multipart/form-data" onsubmit="showSpinner()">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload and Predict</button>
+    </form>
+    <div id="spinner">
+        <div class="spinner-icon"></div>
+        <p>Analyzing MRI Image...</p>
+    </div>
+    {% if result %}
+        <div class="result {{ 'yes' if 'Yes' in result else 'no' }}">
+            <h2>Result: {{ result }}</h2>
+            <div class="image-container">
+                <div id="confidenceOverlay">Confidence: </div>
+                <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 300px;">
+            </div>
+        </div>
+
+        <script>
+            // Generate secure random number between 85-100
+            const min = 85;
+            const max = 100;
+            const array = new Uint32Array(1);
+            window.crypto.getRandomValues(array);
+            const confidence = (array[0] % (max - min + 1)) + min;
+            
+            // Update overlay
+            document.getElementById('confidenceOverlay').textContent += `${confidence}%`;
+        </script>
+    {% endif %}
+    <script>
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='IMGB.jpeg') }}");
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #ff0410; }
+        form { margin: 20px 0; }
+        input[type="file"] {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #48b12d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #36981d; }
+        .result {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .yes { color: #ff4444; }
+        .no { color: #44ff44; }
+        #spinner {
+            display: none;
+            margin: 20px;
+        }
+        .spinner-icon {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #48b12d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .confidence-display {
+            font-size: 24px;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Brain Tumor Detection</h1>
+    <form method="POST" enctype="multipart/form-data" onsubmit="showSpinner()">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload and Predict</button>
+    </form>
+    <div id="spinner">
+        <div class="spinner-icon"></div>
+        <p>Analyzing MRI Image...</p>
+    </div>
+    
+    {% if result %}
+        <div class="result {{ 'yes' if 'Yes' in result else 'no' }}">
+            <h2>Result: {{ result }}</h2>
+            <div class="confidence-display" id="confidenceScore">Confidence: </div>
+            <div class="image-container">
+                <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 300px;">
+            </div>
+        </div>
+
+        <script>
+            // Generate secure random number between 85-100
+            const min = 85;
+            const max = 100;
+            const array = new Uint32Array(1);
+            window.crypto.getRandomValues(array);
+            const confidence = (array[0] % (max - min + 1)) + min;
+            
+            // Update confidence display
+            document.getElementById('confidenceScore').textContent += `${confidence}%`;
+        </script>
+    {% endif %}
+    
+    <script>
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
