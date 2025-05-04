@@ -55,13 +55,18 @@
 ---
 
 ## 4. Results & Visualization
-- **Figure 1**: Segmentation overlay (red = tumor, blue = edema).  
-  ![Segmentation Example](segmentation_example.png)
-- **Figure 2**: ROC curve for malignancy classification (AUC = 0.96).
--  **Figure 1**: Segmentation overlay (red = tumor, blue = edema).  
-  ![Segmentation Example](segmentation_example.png)
-- **Figure 2**: ROC curve for malignancy classification (AUC = 0.96). 
+## Results
+### Segmentation Output
+![Tumor Segmentation Overlay](https://github.com/1khalaneshubham/Brain-Tumor-Detection-System-using-MRI-Images/blob/main/Screenshot%20from%202025-05-04%2015-32-27.png)  
+*Figure 2: Segmentation result (red = tumor, blue = edema).*
+![Tumor Segmentation Overlay](https://github.com/1khalaneshubham/Brain-Tumor-Detection-System-using-MRI-Images/blob/main/Screenshot%20from%202025-05-04%2015-33-40.png)  
+*Figure 3: Segmentation result (red = tumor, blue = edema).*
+![Tumor Segmentation Overlay](https://github.com/1khalaneshubham/Brain-Tumor-Detection-System-using-MRI-Images/blob/main/Screenshot%20from%202025-05-04%2015-35-48.png)  
+*Figure 3: Segmentation result (red = tumor, blue = edema).*
 
+### Classification Metrics
+![ROC Curve](https://i.imgur.com/abc123.png)  
+*Figure 2: ROC curve for tumor classification (AUC = 0.96).*
 ---
 
 ## 5. Code Implementation
