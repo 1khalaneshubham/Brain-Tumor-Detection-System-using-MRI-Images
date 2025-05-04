@@ -65,7 +65,7 @@
 *Figure 3: Segmentation result (red = tumor, blue = edema).*
 
 ### Classification Metrics
-![ROC Curve](https://i.imgur.com/abc123.png)  
+![ROC Curve](https://github.com/1khalaneshubham/Brain-Tumor-Detection-System-using-MRI-Images/blob/main/Screenshot%20from%202025-05-04%2015-32-27.png)  
 *Figure 2: ROC curve for tumor classification (AUC = 0.96).*
 ---
 
